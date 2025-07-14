@@ -88,3 +88,38 @@ built-in storage remembers your conversations to keep it personalized
 
 
 this system basically makes ai, meme creation, and image generation feel simple, just like chatting with a funny friend who's good at making memes.
+
+## docker deployment
+
+the meme generator is available as a docker container for easy deployment anywhere.
+
+### 🐳 docker hub repository
+
+* **image name:** `sidharthh/mastra-meme-generator`
+* **tags:** `latest` and `v1.0.0`
+* **registry:** docker hub (https://hub.docker.com/r/sidharthh/mastra-meme-generator)
+
+### 🚀 how to run the container
+
+latest version:
+```bash
+docker run -p 3000:3000 sidharthh/mastra-meme-generator:latest
+```
+
+specific version:
+```bash
+docker run -p 3000:3000 sidharthh/mastra-meme-generator:v1.0.0
+```
+
+### 🔧 container features
+
+* uses node.js 20 alpine for lightweight deployment
+* installs dependencies using pnpm
+* builds the mastra application automatically
+* runs as non-root user for security
+* exposes port 3000
+* follows docker best practices
+
+### 📦 deployment ready
+
+the container is publicly available on docker hub and ready for deployment on any platform that supports docker containers (aws, google cloud, azure, heroku, etc.).
