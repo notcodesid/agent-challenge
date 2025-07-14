@@ -1,38 +1,36 @@
-FROM ollama/ollama:0.7.0
+# Use the official Node.js runtime as the base image
+FROM node:20-alpine
 
-# Qwen2.5:1.5b - Docker
-ENV API_BASE_URL=http://127.0.0.1:11434/api
-ENV MODEL_NAME_AT_ENDPOINT=qwen2.5:1.5b
-
-# Qwen2.5:32b = Docker
-# ENV API_BASE_URL=http://127.0.0.1:11434/api
-# ENV MODEL_NAME_AT_ENDPOINT=qwen2.5:32b
-
-# Install system dependencies and Node.js
-RUN apt-get update && apt-get install -y \
-  curl \
-  && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-  && apt-get install -y nodejs \
-  && rm -rf /var/lib/apt/lists/* \
-  && npm install -g pnpm
-
-# Create app directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package files
-COPY .env.docker package.json pnpm-lock.yaml ./
+# Install pnpm
+RUN npm install -g pnpm
+
+# Copy package.json and pnpm-lock.yaml for dependency installation
+COPY package.json pnpm-lock.yaml ./
 
 # Install dependencies
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
-# Copy the rest of the application
+# Copy the rest of the application code
 COPY . .
 
-# Build the project
+# Build the application
 RUN pnpm run build
 
-# Override the default entrypoint
-ENTRYPOINT ["/bin/sh", "-c"]
+# Create a non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S mastra -u 1001
 
-# Start Ollama service and pull the model, then run the app
-CMD ["ollama serve & sleep 5 && ollama pull ${MODEL_NAME_AT_ENDPOINT} && node .mastra/output/index.mjs"]
+# Change ownership of the app directory to the nodejs user
+RUN chown -R mastra:nodejs /app
+
+# Switch to the non-root user
+USER mastra
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Define the command to run the application
+CMD ["pnpm", "start"]
