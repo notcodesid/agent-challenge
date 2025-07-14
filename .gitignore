@@ -2,23 +2,6 @@ output.txt
 node_modules
 dist
 .mastra
-<<<<<<< HEAD
-.env.development
+*.db
+*.db-*
 .env
-*.db
-*.db-*
-.next/
-
-# Slidev
-*.local
-.vite-inspect
-.remote-assets
-components.d.ts
-.DS_Store
-
-# Saved memes folder
-saved-memes/
-=======
-*.db
-*.db-*
->>>>>>> 1ed8ef35e2c5e6850154f816e7a38d421fe9aa53
