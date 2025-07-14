@@ -334,4 +334,8 @@ All prizes are paid out directly to participants on [SuperTeam](https://supertea
 ### Don’t Miss Nosana Builder Challenge Updates
 
 Good luck, builders! We can't wait to see the innovative AI agents you create for the Nosana ecosystem.
+<<<<<<< HEAD
 **Happy Building!**
+=======
+**Happy Building!**
+>>>>>>> 1ed8ef35e2c5e6850154f816e7a38d421fe9aa53

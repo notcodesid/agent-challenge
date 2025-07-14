@@ -2,6 +2,7 @@ output.txt
 node_modules
 dist
 .mastra
+<<<<<<< HEAD
 .env.development
 .env
 *.db
@@ -17,3 +18,7 @@ components.d.ts
 
 # Saved memes folder
 saved-memes/
+=======
+*.db
+*.db-*
+>>>>>>> 1ed8ef35e2c5e6850154f816e7a38d421fe9aa53
